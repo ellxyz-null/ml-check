@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Moonton Checker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="hdr">
+  <svg class="hdr-logo" viewBox="0 0 32 32" fill="none">
+    <rect width="32" height="32" rx="7" fill="#080e1c"/>
+    <path d="M16 3L29 9.5V22.5L16 29L3 22.5V9.5L16 3Z" stroke="#00f5ff" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M16 8L24 12.5V21.5L16 26L8 21.5V12.5L16 8Z" fill="rgba(0,245,255,0.05)" stroke="#00f5ff" stroke-width="1" stroke-linejoin="round"/>
+    <circle cx="16" cy="17" r="3" fill="#00f5ff" opacity=".85"/>
+  </svg>
+  <div class="hdr-info">
+    <h1>Moonton Checker</h1>
+    <p>Mobile Legends Account Validator</p>
+  </div>
+  <div class="hdr-st">
+    <div class="dot" id="dot"></div>
+    <span id="stxt">IDLE</span>
+  </div>
+</div>
+
+<div class="content">
+  <div class="page active" id="pg-checker">
+
+    <div class="card">
+      <div class="ct">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload List
+      </div>
+      <div class="drop" id="dropZ">
+        <input type="file" id="fInput" accept=".txt">
+        <div class="drop-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="12" y2="12"/><line x1="15" y1="15" x2="12" y2="12"/></svg>
+        </div>
+        <div class="drop-t">Drop file atau <b>Browse</b></div>
+        <div class="drop-f">Format: email:password atau email|password</div>
+        <div class="drop-fn" id="fname"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ct">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Statistik
+      </div>
+      <div class="stats">
+        <div class="sb c"><span class="sv" id="sT">0</span><div class="sl">Total</div></div>
+        <div class="sb g"><span class="sv" id="sL">0</span><div class="sl">Berhasil</div></div>
+        <div class="sb r"><span class="sv" id="sD">0</span><div class="sl">Gagal</div></div>
+      </div>
+      <div class="pw"><div class="pb" id="pb"></div></div>
+      <div class="pt" id="pt">0 / 0</div>
+    </div>
+
+    <div class="card">
+      <div class="ct">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Pengaturan
+      </div>
+      <div class="sr">
+        <span class="sl2">Thread:</span>
+        <input type="range" id="tSl" min="1" max="20" value="5">
+        <span class="sv2" id="tV">5</span>
+      </div>
+      <div class="br">
+        <button class="btn btn-go" id="btnGo" disabled>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          MULAI
+        </button>
+        <button class="btn btn-halt" id="btnHalt" disabled>
+          <svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+          STOP
+        </button>
+      </div>
+      <div class="px-info" id="pxInfo">
+        Mode: <span>Server Proxy</span> — proxy diambil otomatis dari free-proxy-list.net
+      </div>
+    </div>
+
+    <div class="card" style="flex-shrink:0">
+      <div class="ct">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        Live Log
+      </div>
+      <div class="lb2" id="logB">
+        <div class="le-empty" id="logE">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Menunggu proses dimulai...
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page" id="pg-results">
+    <div class="card" style="flex:1;display:flex;flex-direction:column;min-height:0">
+      <div class="ct">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Hasil Checker
+      </div>
+      <div class="tabs">
+        <button class="tab ta" data-t="all"  onclick="setTab('all')">Semua</button>
+        <button class="tab"   data-t="live" onclick="setTab('live')">Berhasil</button>
+        <button class="tab"   data-t="die"  onclick="setTab('die')">Gagal</button>
+      </div>
+      <div class="rl" id="rl"></div>
+      <div class="acts">
+        <button class="act ag" onclick="dlR('live')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Live.txt
+        </button>
+        <button class="act ar" onclick="dlR('die')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Die.txt
+        </button>
+        <button class="act ac" onclick="cpAll()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="pg-about">
+    <div class="card">
+      <div class="alogo">
+        <svg viewBox="0 0 56 56" fill="none">
+          <path d="M28 3L53 16V40L28 53L3 40V16L28 3Z" stroke="#00f5ff" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M28 11L45 20V38L28 47L11 38V20L28 11Z" fill="rgba(0,245,255,0.04)" stroke="#00f5ff" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="28" cy="28" r="5.5" fill="#00f5ff" opacity=".82"/>
+          <line x1="28" y1="11" x2="28" y2="22.5" stroke="#00f5ff" stroke-width="1.5" opacity=".4"/>
+          <line x1="45" y1="20" x2="34" y2="26" stroke="#00f5ff" stroke-width="1.5" opacity=".4"/>
+          <line x1="45" y1="38" x2="34" y2="32" stroke="#00f5ff" stroke-width="1.5" opacity=".4"/>
+          <line x1="28" y1="47" x2="28" y2="33.5" stroke="#00f5ff" stroke-width="1.5" opacity=".4"/>
+          <line x1="11" y1="38" x2="22" y2="32" stroke="#00f5ff" stroke-width="1.5" opacity=".4"/>
+          <line x1="11" y1="20" x2="22" y2="26" stroke="#00f5ff" stroke-width="1.5" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="aname">Moonton Checker</div>
+      <div class="asub">Mobile Legends Account Validator v2.1</div>
+    </div>
+    <div class="card">
+      <div class="ct">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Informasi
+      </div>
+      <div class="ir"><span class="ik">Target API</span><span class="iv">accountmtapi.mobilelegends.com</span></div>
+      <div class="ir"><span class="ik">Auth Method</span><span class="iv">POST + MD5 Hash Sign</span></div>
+      <div class="ir"><span class="ik">CORS Strategy</span><span class="iv">Server-side proxy dengan scraping proxy</span></div>
+      <div class="ir"><span class="ik">Format File</span><span class="iv">email:pass / email|pass</span></div>
+      <div class="ir"><span class="ik">Max Thread</span><span class="iv">20 concurrent</span></div>
+      <div class="ir"><span class="ik">Timeout/Akun</span><span class="iv">12 detik (server coba semua proxy)</span></div>
+    </div>
+    <div class="card">
+      <div class="ct">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Peringatan
+      </div>
+      <div class="wb">
+        Tool ini hanya untuk keperluan edukasi dan pengujian akun milik sendiri.
+        Penggunaan tanpa izin pemilik akun melanggar syarat layanan Moonton
+        dan hukum yang berlaku. Gunakan dengan penuh tanggung jawab.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<nav class="bnav">
+  <button class="ni active" id="ni-checker" onclick="goPage('checker')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <span>Checker</span>
+  </button>
+  <button class="ni" id="ni-results" onclick="goPage('results')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+    <span>Hasil</span>
+    <div class="nbadge" id="nb"></div>
+  </button>
+  <button class="ni" id="ni-about" onclick="goPage('about')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span>Info</span>
+  </button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script src="main.js"></script>
+</body>
+</html>
